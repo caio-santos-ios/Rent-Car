@@ -6,16 +6,27 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  cpf   String  @unique
-  email String  @unique
-  name  String?
-  password String
+  id          Int       @id @default(autoincrement())
+  cpf         String    @unique
+  email       String    @unique
+  name        String?
+  password    String
+  carId       Car[]
 
   @@map("users")
+}
+
+model Car {
+  id      Int       @id @default(autoincrement())
+  photos  Json[]
+  model   String
+  userId  Int       
+  user    User      @relation(fields: [userId], references: [id])
+
+  @@map("cars")
 }
