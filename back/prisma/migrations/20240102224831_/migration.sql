@@ -12,6 +12,7 @@ CREATE TABLE "users" (
 -- CreateTable
 CREATE TABLE "cars" (
     "id" SERIAL NOT NULL,
+    "photos" JSONB[],
     "model" TEXT NOT NULL,
     "userId" INTEGER NOT NULL,
 
